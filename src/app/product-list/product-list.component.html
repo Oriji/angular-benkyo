@@ -1,0 +1,29 @@
+<h2>Products</h2>
+
+<div *ngFor="let product of products">
+  <h3>
+    <a
+      [title]="product.name + ' details'"
+      [routerLink]="['/products', product.id]"
+    >
+      {{ product.name }}
+    </a>
+  </h3>
+  <p *ngIf="product.description">
+    Description: {{ product.description }}
+  </p>
+  <button (click)="share()">
+    Share
+  </button>
+  <!-- コンポーネントの親子関係は、htmlテンプレートで規定する -->
+  <!-- (notify):EventEmitterイベントの発火(?)は 子で定義したイベント変数名を属性名に指定して受ける -->
+  <!-- [product]:属性名は、tsで定義したクラスのプロパティ名と同期させる必要がある -->
+  <app-product-alerts [product]="product" (notify)="onNotify()">
+  </app-product-alerts>
+</div>
+
+<!-- 
+Copyright Google LLC. All Rights Reserved.
+Use of this source code is governed by an MIT-style license that
+can be found in the LICENSE file at https://angular.io/license
+-->
